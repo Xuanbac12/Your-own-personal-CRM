@@ -1,15 +1,12 @@
 import axios from 'axios';
 
-const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL; // "/api"
 
-
-// Request DTO
 export interface TagRequest {
   name: string;
   color: string;
 }
 
-// Response DTO
 export interface TagResponse {
   id: number;
   name: string;
@@ -30,18 +27,17 @@ export const createTag = async (data: TagRequest): Promise<TagResponse> => {
 
 // Sửa tag
 export const updateTag = async (id: number, data: TagRequest): Promise<TagResponse> => {
-  const response = await axios.put(`${API_BASE_URL}/${id}`, data);
+  const response = await axios.put(`${API_BASE_URL}/tag/${id}`, data);
   return response.data;
 };
 
 // Xoá tag
 export const deleteTag = async (id: number): Promise<void> => {
-  await axios.delete(`${API_BASE_URL}/${id}`);
+  await axios.delete(`${API_BASE_URL}/tag/${id}`);
 };
 
-// Lấy chi tiết 1 customer type theo ID
+// Lấy chi tiết 1 tag theo ID
 export const getTagById = async (id: number): Promise<TagResponse> => {
-  const response = await axios.get(`${API_BASE_URL}/${id}`);
+  const response = await axios.get(`${API_BASE_URL}/tag/${id}`);
   return response.data;
 };
-
