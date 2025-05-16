@@ -2,7 +2,8 @@
 import axios from 'axios';
 
 // Đường dẫn base URL backend
-const API_BASE_URL = `${process.env.REACT_APP_API_BASE_URL}/...`;
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 
 // Request DTO
 export interface CustomerTypeRequest {
@@ -21,7 +22,7 @@ export interface CustomerTypeResponse {
 
 // Lấy danh sách tất cả customer type
 export const fetchCustomerTypes = async (): Promise<CustomerTypeResponse[]> => {
-  const response = await axios.get(API_BASE_URL);
+  const response = await axios.get(`${API_BASE_URL}/customerType`);
   return response.data;
 };
 
@@ -33,7 +34,7 @@ export const getCustomerTypeById = async (id: string): Promise<CustomerTypeRespo
 
 // Tạo mới customer type
 export const createCustomerType = async (data: CustomerTypeRequest): Promise<CustomerTypeResponse> => {
-  const response = await axios.post(API_BASE_URL, data);
+  const response = await axios.post(`${API_BASE_URL}/customerType`, data);
   return response.data;
 };
 

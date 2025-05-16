@@ -1,7 +1,8 @@
 import axios from 'axios';
 import { CustomerRequest } from '../types/customer';
 
-const API_BASE_URL = `${process.env.REACT_APP_API_BASE_URL}/...`;
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 
 
 export const fetchCustomers = () =>

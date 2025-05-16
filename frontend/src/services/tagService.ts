@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = `${process.env.REACT_APP_API_BASE_URL}/...`;
+const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
 
 
 // Request DTO
@@ -18,13 +18,13 @@ export interface TagResponse {
 
 // Lấy danh sách tất cả tags
 export const fetchTags = async (): Promise<TagResponse[]> => {
-  const response = await axios.get(API_BASE_URL);
+  const response = await axios.get(`${API_BASE_URL}/tag`);
   return response.data;
 };
 
 // Tạo tag mới
 export const createTag = async (data: TagRequest): Promise<TagResponse> => {
-  const response = await axios.post(API_BASE_URL, data);
+  const response = await axios.post(`${API_BASE_URL}/tag`, data);
   return response.data;
 };
 
