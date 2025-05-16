@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 // Đường dẫn base URL backend
-const API_BASE_URL = 'http://localhost:8080/xuanbac/customerType';
+const API_BASE_URL = `${process.env.REACT_APP_API_BASE_URL}/...`;
 
 // Request DTO
 export interface CustomerTypeRequest {
