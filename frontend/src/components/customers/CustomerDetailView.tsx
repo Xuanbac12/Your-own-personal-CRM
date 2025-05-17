@@ -133,14 +133,16 @@ function formatDateToView(dateString: string): string {
               <div className="mt-2">
                 {customer.tagNames?.length > 0 ? (
                   <div className="flex flex-wrap gap-2">
-                    {customer.tagNames.map((tag: string, index: number) => (
-                      <span
-                        key={index}
-                        className="px-3 py-1 bg-gray-100 text-gray-700 text-sm rounded-full"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                   {customer.tagNames?.map((tag: { name: string; color: string }, index: number) => (
+  <span
+    key={index}
+    className="px-3 py-1"
+    style={{ backgroundColor: tag.color, color: "#fff", borderRadius: "9999px" }}
+  >
+    {tag.name}
+  </span>
+))}
+
                   </div>
                 ) : (
                   <p className="text-gray-400">Không có nhãn</p>
