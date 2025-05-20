@@ -243,8 +243,8 @@ const handleFormChange = (
       <CustomerDialog
         open={dialogOpen}
         onClose={() => setDialogOpen(false)}
-        formData={formData}
-        onChange={handleFormChange}
+        initialValues={formData}
+       // onChange={handleFormChange}
         onSubmit={handleSubmit}
         onReset={resetForm}
         customerTypes={customerTypes}
