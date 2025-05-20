@@ -90,10 +90,7 @@ export const CustomerManagement: React.FC = () => {
   const handleEditCustomer = (customer: CustomerResponse) => {
    const customerTypeId = customer.customerTypes?.[0]?.id;
 
-
-    const tagIds = customer.tagNames
-      ?.map((tagName: string) => availableTags.find((t) => t.name === tagName)?.id)
-      .filter(Boolean) as string[];
+    const tagIds = customer.tagNames?.map((tag) => tag.id) || [];
 
     setFormData({
       fullName: customer.fullName || '',
@@ -102,10 +99,10 @@ export const CustomerManagement: React.FC = () => {
       address: customer.address || '',
       gender: customer.gender as 'Nam' | 'Nữ' | 'Khác',
       dateOfBirth: formatDateForInput(customer.dateOfBirth),
-customerTypeIds: customerTypeId ? [customerTypeId] : [],
+      customerTypeIds: customerTypeId ? [customerTypeId] : [],
+      tagIds: tagIds,
 
-      tagIds:  tagIds.map((id) => parseInt(id, 10)), // ✅ ép từng string → number
-      note: customer.note || '',
+        note: customer.note || '',
       avatarUrl: customer.avatarUrl || '',
     });
 

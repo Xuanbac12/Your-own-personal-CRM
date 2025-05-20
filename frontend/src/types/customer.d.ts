@@ -15,7 +15,12 @@ export interface CustomerResponse {
   color: string;
 }[];
  // ví dụ: ['VIP', 'Thường xuyên']
-  tagNames: string[];          // ví dụ: ['Bạn bè', 'Thân thiết']
+  tagNames: {
+    id : number;
+    name: string;
+    color: string;
+  }[]; // ví dụ: ['Bạn bè', 'Thân thiết']
+            // ví dụ: ['Bạn bè', 'Thân thiết']
 }
 
 // 📤 Dữ liệu gửi lên backend (POST / PUT)

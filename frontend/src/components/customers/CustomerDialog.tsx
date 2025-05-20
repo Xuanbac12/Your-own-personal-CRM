@@ -70,8 +70,9 @@ const validationSchema = Yup.object({
 
   gender: Yup.string().required('Vui lòng chọn giới tính'),
   dateOfBirth: Yup.date()
-    .max(new Date(), 'Ngày sinh không được trong tương lai')
-    .nullable(),
+    .required('Ngày sinh là bắt buộc')
+    .max(new Date(), 'Ngày sinh không được trong tương lai'),
+    
   customerTypeIds: Yup.array().min(1, 'Vui lòng chọn loại khách hàng'),
   note: Yup.string().max(500, 'Ghi chú không được quá 500 ký tự'),
 });
