@@ -89,6 +89,7 @@ export const CustomerDialog: React.FC<CustomerDialogProps> = ({
   if (!open) return null;
 console.log('🔥 Schema đang dùng:', validationSchema);
 
+
   return (
     <div className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center z-50">
       <div className="bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-auto">

@@ -200,11 +200,13 @@ const handleFormChange = (
     return `${year}-${month}-${day}`;
   }
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (values: CustomerRequest) => {
+    console.log('🔥 formData tại thời điểm submit:', formData);
     const payload: CustomerRequest = {
-      ...formData,
-      dateOfBirth: formatDateForBackend(formData.dateOfBirth),
+      ...values,
+      dateOfBirth: formatDateForBackend(values.dateOfBirth),
     };
+      console.log('📦 Payload gửi lên:', payload);
 
     try {
       if (editingCustomerId) {
