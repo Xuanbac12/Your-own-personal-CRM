@@ -87,6 +87,7 @@ export const CustomerDialog: React.FC<CustomerDialogProps> = ({
   initialValues,
 }) => {
   if (!open) return null;
+console.log('🔥 Schema đang dùng:', validationSchema);
 
   return (
     <div className="fixed inset-0 bg-black bg-opacity-25 backdrop-blur-sm flex justify-center items-center z-50">
@@ -104,6 +105,8 @@ export const CustomerDialog: React.FC<CustomerDialogProps> = ({
             <X className="h-5 w-5" />
           </button>
         </div>
+      
+
 
         <Formik
           initialValues={initialValues}
