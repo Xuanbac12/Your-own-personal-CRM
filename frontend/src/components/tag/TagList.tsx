@@ -14,8 +14,7 @@ interface Tag {
 interface CustomerResponse {
   id: string;
   fullName: string;
-  // customerTypes: { id: string; name: string }[];
-  tagNames: { id: number; name: string; color: string }[]; // ✅ thêm dòng này
+  tagNames: { id: number; name: string; color: string }[];
 }
 
 export const TagList: React.FC = () => {
@@ -57,19 +56,26 @@ export const TagList: React.FC = () => {
     loadCustomers();
   }, []);
 
- const handleDelete = async () => {
-  if (!confirmDeleteId) return;
-  try {
-    await deleteTag(confirmDeleteId);
-    await loadTags();
-    setConfirmOpen(false); // ✅ đóng dialog trước khi mất dữ liệu
-    setConfirmDeleteId(null); // reset ID
-    showToast("Đã xóa tag thành công", "success");
-  } catch (err) {
-    alert("Xoá tag thất bại!");
-  }
-};
+  const handleDelete = async () => {
+    if (!confirmDeleteId) return;
 
+    const tagToDelete = tags.find((t) => t.id === confirmDeleteId);
+    if (tagToDelete?.name === "Không xác định") {
+      showToast("Không thể xoá tag mặc định 'Không xác định'", "error");
+      setConfirmOpen(false);
+      return;
+    }
+
+    try {
+      await deleteTag(confirmDeleteId);
+      await loadTags();
+      setConfirmOpen(false);
+      setConfirmDeleteId(null);
+      showToast("Đã xóa tag thành công", "success");
+    } catch (err) {
+      alert("Xoá tag thất bại!");
+    }
+  };
 
   const getCustomerCountUsingTag = (tagId: number): number => {
     return customers.filter((customer) =>
@@ -119,24 +125,32 @@ export const TagList: React.FC = () => {
                 >
                   <Edit2 size={16} />
                 </button>
-                <button
-                  title="Delete Tag"
-                  onClick={() => {
-                    setConfirmDeleteId(tag.id);
-                    setConfirmOpen(true);
-                  }}
-                  
-                  className="text-gray-600 hover:text-red-600"
-                >
-                  <Trash2 size={16} />
-                </button>
+                {tag.name === "Không xác định" ? (
+                  <button
+                    disabled
+                    title="Không thể xoá tag mặc định"
+                    className="text-gray-400 cursor-not-allowed"
+                  >
+                    <Trash2 size={16} />
+                  </button>
+                ) : (
+                  <button
+                    title="Delete Tag"
+                    onClick={() => {
+                      setConfirmDeleteId(tag.id);
+                      setConfirmOpen(true);
+                    }}
+                    className="text-gray-600 hover:text-red-600"
+                  >
+                    <Trash2 size={16} />
+                  </button>
+                )}
               </div>
             </div>
           ))}
         </div>
       )}
 
-      {/* Dialog Thêm/Sửa Tag */}
       <TagDialog
         open={dialogOpen}
         onClose={() => {
@@ -147,7 +161,6 @@ export const TagList: React.FC = () => {
         onSuccess={loadTags}
       />
 
-      {/* Xác nhận xoá đơn giản */}
       <ConfirmDialog
         open={confirmOpen}
         onClose={() => {
@@ -160,7 +173,7 @@ export const TagList: React.FC = () => {
           confirmDeleteId ? (
             <>
               <p>
-                Bạn có chắc muốn xóa tag{" "}
+                Bạn có chắc muốn xóa tag {" "}
                 <strong>
                   {tags.find((t) => t.id === confirmDeleteId)?.name || ""}
                 </strong>{" "}
@@ -168,7 +181,7 @@ export const TagList: React.FC = () => {
               </p>
               <p className="mt-2 text-sm text-gray-600">
                 Có <strong>{getCustomerCountUsingTag(confirmDeleteId)}</strong>{" "}
-                khách hàng đang sử dụng tag này. Sau khi xóa, họ sẽ được gán tag{" "}
+                khách hàng đang sử dụng tag này. Sau khi xóa, họ sẽ được gán tag {" "}
                 <strong>"Không xác định"</strong>.
               </p>
             </>
