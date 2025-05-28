@@ -42,9 +42,9 @@ export const CustomerList: React.FC<CustomerListProps> = ({
             <tr className="bg-gray-50 text-left">
               <th className="px-4 py-3 text-sm font-medium text-gray-500">Ảnh</th>
               <th className="px-4 py-3 text-sm font-medium text-gray-500">Họ tên</th>
-              <th className="px-4 py-3 text-sm font-medium text-gray-500">Email</th>
-              <th className="px-4 py-3 text-sm font-medium text-gray-500">SĐT</th>
-              <th className="px-4 py-3 text-sm font-medium text-gray-500">Nhãn</th>
+              <th className="px-4 py-3 text-sm font-medium text-gray-500 hidden md:table-cell">Email</th>
+              <th className="px-4 py-3 text-sm font-medium text-gray-500 hidden sm:table-cell">SĐT</th>
+              <th className="px-4 py-3 text-sm font-medium text-gray-500 hidden lg:table-cell">Nhãn</th>
               <th className="px-4 py-3 text-sm font-medium text-gray-500 text-right">Tác vụ</th>
             </tr>
           </thead>
@@ -84,13 +84,13 @@ export const CustomerList: React.FC<CustomerListProps> = ({
                 </td>
 
                 {/* Email */}
-                <td className="px-4 py-3 text-gray-500">{customer.email}</td>
+                <td className="px-4 py-3 text-gray-500 hidden md:table-cell">{customer.email}</td>
 
                 {/* Số điện thoại */}
-                <td className="px-4 py-3 text-gray-500">{customer.phone}</td>
+                <td className="px-4 py-3 text-gray-500 hidden sm:table-cell">{customer.phone}</td>
 
                 {/* Tags */}
-                <td className="px-4 py-3">
+                <td className="px-4 py-3 hidden lg:table-cell">
                 <CustomerTags tags={customer.tagNames || []} />
 
                 </td>

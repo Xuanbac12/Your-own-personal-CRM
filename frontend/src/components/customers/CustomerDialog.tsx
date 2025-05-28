@@ -64,7 +64,7 @@ const validationSchema = Yup.object({
         '081','082','083','084','085','086','088','089',
         '056','058','059'
       ];
-      return validPrefixes.includes(prefix);
+       return validPrefixes.includes(prefix) || normalized.startsWith('09');
     }
   ),
 
